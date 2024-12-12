@@ -38,12 +38,21 @@ public class SimpleServer extends AbstractServer {
 				throw new RuntimeException(e);
 			}
 		}
-
+		else if(msgString.startsWith("remove client")){
+			if(!SubscribersList.isEmpty()){
+				for(SubscribedClient subscribedClient: SubscribersList){
+					if(subscribedClient.getClient().equals(client)){
+						SubscribersList.remove(subscribedClient);
+						break;
+					}
+				}
+			}
+		}
 	}
 	public void sendToAllClients(String message) {
 		try {
-			for (SubscribedClient SubscribedClient : SubscribersList) {
-				SubscribedClient.getClient().sendToClient(message);
+			for (SubscribedClient subscribedClient : SubscribersList) {
+				subscribedClient.getClient().sendToClient(message);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
