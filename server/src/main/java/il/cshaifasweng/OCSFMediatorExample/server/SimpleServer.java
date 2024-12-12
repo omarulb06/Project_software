@@ -4,10 +4,13 @@ import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
+import il.cshaifasweng.OCSFMediatorExample.server.ocsf.SubscribedClient;
 
 public class SimpleServer extends AbstractServer {
+	private static ArrayList<SubscribedClient> SubscribersList = new ArrayList<>();
 
 	public SimpleServer(int port) {
 		super(port);
@@ -26,7 +29,25 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
+		else if(msgString.startsWith("add client")){
+			SubscribedClient connection = new SubscribedClient(client);
+			SubscribersList.add(connection);
+			try {
+				client.sendToClient("client added successfully");
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 
+	}
+	public void sendToAllClients(String message) {
+		try {
+			for (SubscribedClient SubscribedClient : SubscribersList) {
+				SubscribedClient.getClient().sendToClient(message);
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 }
