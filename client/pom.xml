@@ -33,6 +33,18 @@
 			<classifier>win</classifier>
 		</dependency>
 		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-graphics</artifactId>
+			<version>21.0.1</version>
+			<classifier>mac</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-graphics</artifactId>
+			<version>21.0.1</version>
+			<classifier>linux</classifier>
+		</dependency>
+		<dependency>
 			<groupId>org.greenrobot</groupId>
 			<artifactId>eventbus</artifactId>
 			<version>3.2.0</version>
