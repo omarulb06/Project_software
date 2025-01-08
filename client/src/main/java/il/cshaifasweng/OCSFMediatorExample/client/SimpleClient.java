@@ -1,71 +1,40 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
+import il.cshaifasweng.OCSFMediatorExample.entities.Menu;
+
 import org.greenrobot.eventbus.EventBus;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SimpleClient extends AbstractClient {
-
-	private int player_number = 0;
 	private static SimpleClient client = null;
-	char signal;
-	boolean isFirstTurn = false;
-
 	private SimpleClient(String host, int port) {
 		super(host, port);
 	}
 
+
 	@Override
-	protected void handleMessageFromServer(Object msg)
-	{
+	protected void handleMessageFromServer(Object msg) {
 		if (msg instanceof Warning) {
 			EventBus.getDefault().post("ERROR");
-		}
-		else if (msg instanceof String) {
-			System.out.println((String) msg);
+		} else if (msg instanceof String) {
 			String message = (String) msg;
-            if(message.startsWith("client added successfully,"))
-			{
-				if(!message.contains("but"))
-				{
-					EventBus.getDefault().post("the game will start soon");
-					player_number++;
-				}
-				else
-				{
-					EventBus.getDefault().post("wait for another player");
-				}
+			System.out.println(message);
+			if (message.equals("added successfully")) {
+				EventBus.getDefault().post("added");
 			}
-			if (message.startsWith("the game has started"))
-			{
-				if( (message.contains("0") && player_number == 0) || (message.contains("1") && player_number == 1) )
-				{
-					signal = 'X';
-					isFirstTurn = true;
-				}
-				else
-				{
-					signal = 'O';
-				}
-				EventBus.getDefault().post("the game started " + signal + " " + isFirstTurn);
-			}
-			else if (message.startsWith("the_other_player_added")) {
-				String[] parts = message.split(" ");
-				int row = Integer.parseInt(parts[1]);
-				int col = Integer.parseInt(parts[2]);
-				char c = (signal == 'X') ? 'O' : 'X';
-				EventBus.getDefault().post("the_other_player_added " + row +" "+ col +" "+ c);
-			}
+		} else if (msg instanceof Menu) {
+			EventBus.getDefault().post((Menu) msg);
 		}
 	}
 
 	public static synchronized SimpleClient getClient() {
 		if (client == null) {
-			client = new SimpleClient("192.168.62.248", 3000);
+			client = new SimpleClient("localhost", 3000);
 		}
 		return client;
 	}
-
 }
