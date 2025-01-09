@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.QuaternaryController">
+    <children>
+        <TextField editable="false" layoutX="226.0" layoutY="69.0" text="Menu has been updated!" />
+        <Button fx:id="BackBtn" layoutX="237.0" layoutY="174.0" mnemonicParsing="false" onAction="#switchToPrimary" text="Return to homepage" />
+    </children>
+</AnchorPane>
