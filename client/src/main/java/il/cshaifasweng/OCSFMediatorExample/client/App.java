@@ -10,9 +10,18 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /**
  * JavaFX App
@@ -21,12 +30,15 @@ public class App extends Application {
 
     private static Scene scene;
     private SimpleClient client;
+    private static Session session;
+
+
 
     @Override
     public void start(Stage stage) throws IOException {
-    	EventBus.getDefault().register(this);
-    	client = SimpleClient.getClient();
-    	client.openConnection();
+        EventBus.getDefault().register(this);
+        client = SimpleClient.getClient();
+        client.openConnection();
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.show();
@@ -42,29 +54,36 @@ public class App extends Application {
     }
 
     @Override
-	public void stop() throws Exception {
-		// TODO Auto-generated method stub
-    	EventBus.getDefault().unregister(this);
+    public void stop() throws Exception {
+        EventBus.getDefault().unregister(this);
         client.sendToServer("remove client");
         client.closeConnection();
-		super.stop();
-	}
-    
-    @Subscribe
-    public void onWarningEvent(WarningEvent event) {
-    	Platform.runLater(() -> {
-    		Alert alert = new Alert(AlertType.WARNING,
-        			String.format("Message: %s\nTimestamp: %s\n",
-        					event.getWarning().getMessage(),
-        					event.getWarning().getTime().toString())
-        	);
-        	alert.show();
-    	});
-    	
+        super.stop();
     }
 
-	public static void main(String[] args) {
-        launch();
+    @Subscribe
+    public void onWarningEvent(WarningEvent event) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(AlertType.WARNING,
+                    String.format("Message: %s\nTimestamp: %s\n",
+                            event.getWarning().getMessage(),
+                            event.getWarning().getTime().toString())
+            );
+            alert.show();
+        });
+
     }
+
+    public static void main(String[] args) {
+        try {
+
+            launch();
+
+        } catch (Exception exception) {
+            System.err.println("An error occurred, changes have been rolled back.");
+            exception.printStackTrace();
+        }
+    }
+
 
 }

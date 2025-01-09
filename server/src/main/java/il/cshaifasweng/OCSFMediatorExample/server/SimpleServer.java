@@ -1,26 +1,23 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.entities.Dish;
-import il.cshaifasweng.OCSFMediatorExample.entities.Menu;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.SubscribedClient;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 
 public class SimpleServer extends AbstractServer {
 
@@ -30,6 +27,9 @@ public class SimpleServer extends AbstractServer {
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		var config = new Configuration();
 		config.addAnnotatedClass(Dish.class);
+		config.addAnnotatedClass(Ingredient.class);
+		config.addAnnotatedClass(PersonalPreference.class);
+
 		var serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 		return config.buildSessionFactory(serviceRegistry);
 	}
@@ -37,15 +37,106 @@ public class SimpleServer extends AbstractServer {
 	public SimpleServer(int port) throws HibernateException {
 		super(port);
 		try {
-			var sessionFactory = getSessionFactory();
+			SessionFactory sessionFactory = getSessionFactory();
 			session = sessionFactory.openSession();
-		} catch (HibernateException e) {
-			if (session != null)
-				session.close();
-			throw e;
+			session.beginTransaction();
+
+			// Generate sample meals
+			generateSampleMeals();
+			printAllDishes();
+
+			session.getTransaction().commit(); // Save everything
+
+
+		} catch (Exception exception) {
+			if (session != null) {
+				session.getTransaction().rollback();
+			}
+			System.err.println("An error occurred, changes have been rolled back.");
+			exception.printStackTrace();
 		}
 	}
+	private static void generateSampleMeals() {
+		Ingredient cheese = new Ingredient();
+		cheese.setName("Cheese");
 
+		Ingredient tomato = new Ingredient();
+		tomato.setName("Tomato");
+
+		Ingredient beef = new Ingredient();
+		beef.setName("Beef");
+
+		Ingredient lettuce = new Ingredient();
+		lettuce.setName("Lettuce");
+
+		Ingredient bread = new Ingredient();
+		bread.setName("Bread");
+
+		Ingredient chicken = new Ingredient();
+		chicken.setName("Chicken");
+
+		List<Ingredient> burgerIngredients = Arrays.asList(beef, cheese, lettuce, tomato, bread);
+		Dish burger = new Dish();
+		burger.setName("Classic Burger");
+		burger.setPrice(50);
+		burger.setCouldBeDelivered(true);
+		burger.setIngredients(burgerIngredients);
+		//burger.setPreferences(new PersonalPreference());
+
+
+		List<Ingredient> pizzaIngredients = Arrays.asList(cheese, tomato);
+		Dish pizza = new Dish();
+		pizza.setName("Cheese Pizza");
+		pizza.setPrice(40);
+		pizza.setCouldBeDelivered(true);
+		pizza.setIngredients(pizzaIngredients);
+
+		List<Ingredient> saladIngredients = Arrays.asList(lettuce, tomato);
+		Dish salad = new Dish();
+		salad.setName("Fresh Salad");
+		salad.setPrice(30);
+		salad.setCouldBeDelivered(false);
+		salad.setIngredients(saladIngredients);
+
+		List<Ingredient> sandwichIngredients = Arrays.asList(chicken, lettuce, bread);
+		Dish sandwich = new Dish();
+		sandwich.setName("Chicken Sandwich");
+		sandwich.setPrice(35);
+		sandwich.setCouldBeDelivered(true);
+		sandwich.setIngredients(sandwichIngredients);
+
+		List<Ingredient> steakIngredients = Arrays.asList(beef);
+		Dish steak = new Dish();
+		steak.setName("Grilled Steak");
+		steak.setPrice(80);
+		steak.setCouldBeDelivered(false);
+		steak.setIngredients(steakIngredients);
+
+		// Save to database
+		session.save(cheese);
+		session.save(tomato);
+		session.save(beef);
+		session.save(lettuce);
+		session.save(bread);
+		session.save(chicken);
+
+		session.save(burger);
+		session.save(pizza);
+		session.save(salad);
+		session.save(sandwich);
+		session.save(steak);
+
+		session.flush();
+	}
+	private static void printAllDishes() {
+		// Query and print all dishes
+		List<Dish> dishes = session.createQuery("from Dish", Dish.class).getResultList();
+		System.out.println("Dishes retrieved from the database:");
+		for (Dish dish : dishes) {
+			System.out.println("Dish Name: " + dish.getName() + ", Price: " + dish.getPrice() +
+					", Can be delivered: " + dish.isCouldBeDelivered());
+		}
+	}
 	@Override
 	protected synchronized void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		String msgString = msg.toString();
@@ -71,7 +162,9 @@ public class SimpleServer extends AbstractServer {
 				}
 			}
 		} else if (msgString.startsWith("GetDishNames")) {
+
 			var dishNames = getDishNames();
+			System.out.println("dishNames.getClass()");
 			try {
 				client.sendToClient(dishNames);
 			} catch (Exception e) {
@@ -85,25 +178,37 @@ public class SimpleServer extends AbstractServer {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (msg instanceof Menu) {
-			session.beginTransaction();
-			for (var dish : ((Menu) msg).dishes) {
-				session.merge(dish);
+		} else if (msg instanceof Dish) {
+			try {
+				session.beginTransaction();
+
+				var dish = (Dish) msg;
+				System.out.println(dish.getPrice());
+				var dish2 = session.byNaturalId(Dish.class).using("name", dish.getName()).load();
+
+				dish2.setPrice(dish.getPrice());
+				System.out.println("image ");
+				session.getTransaction().commit(); // Save everything
+				printAllDishes();
+				sendToAllClients(new MenuUpdateEvent(dish));
+			} catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occurred, changes have been rolled back.");
+				exception.printStackTrace();
 			}
-			session.getTransaction().commit();
-			sendToAllClients(msg);
+
 		}
 	}
 
-	private static List<String> getDishNames() {
+	private static CompactMenu getDishNames() {
 		session.beginTransaction();
-		var builder = session.getCriteriaBuilder();
-		var query = builder.createQuery(String.class);
-		var root = query.from(Dish.class);
-		query.select(root.get("name"));
-		var dishNames = session.createQuery(query).getResultList();
+		System.out.println("Ronny");
+		List<String> dishNames = session.createQuery("SELECT d.name FROM Dish d", String.class).getResultList();
 		session.getTransaction().commit();
-		return dishNames;
+		System.out.println("Omar");
+		return new CompactMenu(dishNames);
 	}
 
 	private static Dish getDish(String dishName) {

@@ -1,13 +1,12 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.CompactMenu;
+import il.cshaifasweng.OCSFMediatorExample.entities.Dish;
+import il.cshaifasweng.OCSFMediatorExample.entities.MenuUpdateEvent;
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
-import il.cshaifasweng.OCSFMediatorExample.entities.Menu;
 
 import org.greenrobot.eventbus.EventBus;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class SimpleClient extends AbstractClient {
 	private static SimpleClient client = null;
@@ -26,8 +25,29 @@ public class SimpleClient extends AbstractClient {
 			if (message.equals("added successfully")) {
 				EventBus.getDefault().post("added");
 			}
-		} else if (msg instanceof Menu) {
-			EventBus.getDefault().post((Menu) msg);
+		} else if (msg instanceof CompactMenu) {
+			try {
+				App.setRoot("secondary");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println("ABCD");
+			EventBus.getDefault().post(msg);
+		} else if (msg instanceof Dish) {
+			try {
+				App.setRoot("tertiary");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			EventBus.getDefault().post(msg);
+		} else if (msg instanceof MenuUpdateEvent) {
+			System.out.println("im here");
+			try {
+
+				App.setRoot("quaternary");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

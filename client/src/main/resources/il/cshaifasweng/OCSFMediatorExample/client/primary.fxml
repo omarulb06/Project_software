@@ -2,23 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="476.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
    <children>
-      <Button fx:id="change1" layoutX="458.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="26.0" prefWidth="135.0" text="שנה מחיר של מוצר א" />
-      <Button fx:id="change2" layoutX="459.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleButtonClick" text="שנה מחיר של מוצר ב" />
-      <Button fx:id="change3" layoutX="460.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleButtonClick" text="שנה מחיר של מוצג ג" />
-      <Button fx:id="change4" layoutX="459.0" layoutY="236.0" mnemonicParsing="false" onAction="#handleButtonClick" text="שנה מחיר של מוצר ד" />
-      <Button fx:id="change5" layoutX="458.0" layoutY="318.0" mnemonicParsing="false" onAction="#handleButtonClick" text="שנה מחיר של מוצר ה" />
-      <TextField fx:id="text1" layoutX="225.0" layoutY="13.0" />
-      <TextField fx:id="text2" layoutX="226.0" layoutY="75.0" />
-      <TextField fx:id="text3" layoutX="230.0" layoutY="155.0" />
-      <TextField fx:id="text4" layoutX="232.0" layoutY="236.0" />
-      <TextField fx:id="text5" layoutX="232.0" layoutY="318.0" />
-      <Label fx:id="statusLabel" layoutX="65.0" layoutY="17.0" text="Status" />
-      <Button fx:id="ButtonMenu" layoutX="48.0" layoutY="318.0" mnemonicParsing="false" onAction="#get_menu_page" text="get menu" />
+      <Label fx:id="statusLabel" layoutX="225.0" layoutY="62.0" prefHeight="26.0" prefWidth="40.0" text="Status" />
+      <Button fx:id="MenuBtn" layoutX="205.0" layoutY="36.0" mnemonicParsing="false" onAction="#LoadMenu" text="Show Menu" />
    </children>
 </AnchorPane>

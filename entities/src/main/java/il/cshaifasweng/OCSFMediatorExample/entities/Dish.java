@@ -1,31 +1,75 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
-// probably use several maps:
-// map dish  id to name and price,
-// map dish id to ingredients
-// map dish id to personal preferences
 
-import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import org.hibernate.annotations.*;
+import javax.persistence.*;
+
+import org.hibernate.annotations.NaturalId;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "dishes")
-public class Dish {
+public class Dish implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NaturalId
-    public String name;
+    private String name;
 
-    public int price;
+    private int price;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="DishesIngredients")
-    public List<Ingredient> ingredients;
+    private boolean couldBeDelivered;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="DishesPersonalPreferences")
-    public List<PersonalPreference> preferences;
+    @JoinTable(name = "DishesIngredients")
+    private List<Ingredient> ingredients;
+
+    private PersonalPreference preferences;
+
+    // Getters and Setters
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public boolean isCouldBeDelivered() {
+        return couldBeDelivered;
+    }
+
+    public void setCouldBeDelivered(boolean couldBeDelivered) {
+        this.couldBeDelivered = couldBeDelivered;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public PersonalPreference getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(PersonalPreference preferences) {
+        this.preferences = preferences;
+    }
 }
