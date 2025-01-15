@@ -1,11 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 
-import javax.persistence.*;
-
 import org.hibernate.annotations.NaturalId;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "dishes")
@@ -21,14 +19,19 @@ public class Dish implements Serializable {
 
     private boolean couldBeDelivered;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "DishesIngredients")
-    private List<Ingredient> ingredients;
+    // Remove this field from being an entity relation
+    @Transient
+    private String ingredientsString;
 
-    private PersonalPreference preferences;
-
+    // Remove this field from being an embedded class
+    @Transient
+    private String preferencesLevelOfSpiciness;
+    @Transient
+    private String preferencesKindOfBread;
+    @Transient
+    private String preferencesString;
     // Getters and Setters
-
+    public Dish() {}
     public int getId() {
         return id;
     }
@@ -57,19 +60,36 @@ public class Dish implements Serializable {
         this.couldBeDelivered = couldBeDelivered;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public String getIngredientsString() {
+        return ingredientsString;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredientsString(String ingredientsString) {
+        this.ingredientsString = ingredientsString;
+    }
+    public String getPreferencesLevelOfSpiciness() {
+        return preferencesLevelOfSpiciness;
     }
 
-    public PersonalPreference getPreferences() {
-        return preferences;
+    public void setPreferencesLevelOfSpiciness(String preferencesLevelOfSpiciness) {
+        this.preferencesLevelOfSpiciness = preferencesLevelOfSpiciness;
     }
 
-    public void setPreferences(PersonalPreference preferences) {
-        this.preferences = preferences;
+    // Getter and Setter for preferencesKindOfBread
+    public String getPreferencesKindOfBread() {
+        return preferencesKindOfBread;
     }
+
+    public void setPreferencesKindOfBread(String preferencesKindOfBread) {
+        this.preferencesKindOfBread = preferencesKindOfBread;
+    }
+    public String getPreferencesString() {
+        return getPreferencesLevelOfSpiciness() + getPreferencesKindOfBread();
+    }
+//    public void setPreferencesString(String preferencesString) {
+//        this.preferencesString = preferencesString;
+//    }
+
+
+
 }

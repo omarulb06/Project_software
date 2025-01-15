@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.Light.Distant?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="418.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.HomePageController">
+   <children>
+      <ImageView fitHeight="429.0" fitWidth="430.0" layoutX="-6.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="MenuBtn" contentDisplay="TEXT_ONLY" layoutX="133.0" layoutY="65.0" mnemonicParsing="false" onAction="#LoadMenu" prefHeight="38.0" prefWidth="144.0" text="Show Menu" textAlignment="CENTER">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow>
+                     <color>
+                        <Color red="0.013" green="0.013" blue="0.013" />
+                     </color>
+                  </Shadow>
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="45.0" elevation="30.0">
+                     <color>
+                        <Color red="0.196" green="0.847" blue="0.894" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8500000238418579" green="0.13600000739097595" blue="0.13600000739097595" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.0430000014603138" blue="0.968999981880188" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="statusLabel" layoutX="84.0" layoutY="-5.0" prefHeight="54.0" prefWidth="279.0" text="Welcome To Our Restaurant" wrapText="true">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.699999988079071" green="0.6713333129882812" blue="0.09799999743700027" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.4436403512954712" green="0.4736842215061188" blue="0.1732456088066101" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="Log_inBtn" contentDisplay="TEXT_ONLY" layoutX="137.0" layoutY="131.0" mnemonicParsing="false" onAction="#LoadLogin" prefHeight="38.0" prefWidth="144.0" text="Log in as worker" textAlignment="CENTER">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow>
+                     <color>
+                        <Color red="0.013" green="0.013" blue="0.013" />
+                     </color>
+                  </Shadow>
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="45.0" elevation="30.0">
+                     <color>
+                        <Color red="0.196" green="0.847" blue="0.894" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.85" green="0.136" blue="0.136" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.0" green="0.0" blue="0.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="Complaintbtn" contentDisplay="TEXT_ONLY" layoutX="137.0" layoutY="189.0" mnemonicParsing="false" onAction="#LoadComplaint" prefHeight="38.0" prefWidth="144.0" text="Send Complaint" textAlignment="CENTER">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow>
+                     <color>
+                        <Color red="0.013" green="0.013" blue="0.013" />
+                     </color>
+                  </Shadow>
+               </bumpInput>
+               <light>
+                  <Light.Distant azimuth="45.0" elevation="30.0">
+                     <color>
+                        <Color red="0.196" green="0.847" blue="0.894" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.85" green="0.136" blue="0.136" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.043" green="0.0" blue="0.969" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

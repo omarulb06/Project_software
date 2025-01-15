@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane maxHeight="400.0" maxWidth="423.0" prefHeight="400.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.MenuController">
+   <content>
+      <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="458.0" spacing="10">
+         <children>
+            <AnchorPane prefHeight="730.0" prefWidth="454.0">
+               <children>
+                  <ImageView fitHeight="564.0" fitWidth="406.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Menu.jpg" />
+                     </image>
+                  </ImageView>
+                  <!-- Buttons with unique fx:id and onAction methods -->
+                  <Button fx:id="ChangePrice1" contentDisplay="TEXT_ONLY" layoutX="288.0" layoutY="38.0" mnemonicParsing="false" onAction="#ChangePrice1" prefHeight="38.0" prefWidth="111.0" text="Change Price" textAlignment="CENTER">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                           <stops>
+                              <Stop color="#d8322d" offset="0.0" />
+                              <Stop color="#0b00f7" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <ImageView fitHeight="73.0" fitWidth="82.0" layoutX="14.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Test_Meal.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="Meal1" layoutX="99.0" layoutY="141.0" prefHeight="74.0" prefWidth="181.0" text="Description">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#cbd05c" offset="0.0" />
+                              <Stop color="white" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="Meal2" layoutX="99.0" layoutY="20.0" prefHeight="74.0" prefWidth="181.0" text="Description">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#cbd05c" offset="0.0" />
+                              <Stop color="white" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="Meal3" layoutX="99.0" layoutY="279.0" prefHeight="74.0" prefWidth="181.0" text="Description">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#cbd05c" offset="0.0" />
+                              <Stop color="white" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="Meal4" layoutX="99.0" layoutY="416.0" prefHeight="74.0" prefWidth="181.0" text="Description">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#cbd05c" offset="0.0" />
+                              <Stop color="white" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <!-- TextFields for prices -->
+                  <TextField fx:id="Price3" editable="true" layoutX="17.0" layoutY="356.0" prefHeight="38.0" prefWidth="59.0" style="-fx-background-color: lightgray;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="Price4" editable="true" layoutX="17.0" layoutY="489.0" prefHeight="38.0" prefWidth="59.0" style="-fx-background-color: lightgray;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="Price2" editable="true" layoutX="17.0" layoutY="220.0" prefHeight="38.0" prefWidth="59.0" style="-fx-background-color: lightgray;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="Price1" editable="true" layoutX="17.0" layoutY="90.0" prefHeight="38.0" prefWidth="59.0" style="-fx-background-color: lightgray;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <!-- Change Price buttons with unique fx:id -->
+                  <Button fx:id="ChangePrice2" contentDisplay="TEXT_ONLY" layoutX="288.0" layoutY="159.0" mnemonicParsing="false" onAction="#ChangePrice2" prefHeight="38.0" prefWidth="111.0" text="Change Price" textAlignment="CENTER">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                           <stops>
+                              <Stop color="#d8322d" offset="0.0" />
+                              <Stop color="#0b00f7" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <Button fx:id="ChangePrice3" contentDisplay="TEXT_ONLY" layoutX="288.0" layoutY="297.0" mnemonicParsing="false" onAction="#ChangePrice3" prefHeight="38.0" prefWidth="111.0" text="Change Price" textAlignment="CENTER">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                           <stops>
+                              <Stop color="#d8322d" offset="0.0" />
+                              <Stop color="#0b00f7" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+                  <Button fx:id="ChangePrice4" contentDisplay="TEXT_ONLY" layoutX="288.0" layoutY="434.0" mnemonicParsing="false" onAction="#ChangePrice4" prefHeight="38.0" prefWidth="111.0" text="Change Price" textAlignment="CENTER">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                           <stops>
+                              <Stop color="#d8322d" offset="0.0" />
+                              <Stop color="#0b00f7" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

@@ -14,22 +14,22 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-base</artifactId>
-			<version>21.0.1</version>
+			<version>23.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>21.0.1</version>
+			<version>23.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>21.0.1</version>
+			<version>23.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-graphics</artifactId>
-			<version>21.0.1</version>
+			<version>23.0.1</version>
 			<classifier>win</classifier>
 		</dependency>
 		<dependency>
@@ -38,9 +38,20 @@
 			<version>3.2.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>23.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-graphics</artifactId>
+			<version>23.0.1</version>
+		</dependency>
+		<dependency>
 			<groupId>${groupId}</groupId>
 			<artifactId>entities</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
